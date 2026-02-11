@@ -14,18 +14,27 @@ Fluxo implementado:
 4. Preencher o campo `#password` com senha.
 5. Clicar em **Entrar** para enviar o login.
 
-## Como executar
+## Como executar localmente
 
 ```bash
 npm install
 npx playwright install
-npm run test:e2e
-```
-
-## Configuração de credenciais por variável de ambiente
-
-O teste usa valores padrão (os solicitados), mas você pode sobrescrever:
-
-```bash
 PLAYWRIGHT_EMAIL="seu-email@dominio.com" PLAYWRIGHT_PASSWORD="sua-senha" npm run test:e2e
 ```
+
+## Pipeline no GitHub Actions
+
+Foi adicionada a workflow `.github/workflows/playwright.yml` para rodar os testes em:
+
+- `pull_request`
+- `push` para `main`/`master`
+- execução manual (`workflow_dispatch`)
+
+### Secrets necessários
+
+Cadastre no repositório (Settings → Secrets and variables → Actions):
+
+- `PLAYWRIGHT_EMAIL`
+- `PLAYWRIGHT_PASSWORD`
+
+Sem esses secrets, o teste é marcado como **skipped** com mensagem explicativa.
